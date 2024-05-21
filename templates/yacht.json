@@ -1,7 +1,7 @@
 [
   {
-    "title": "Caddy Docker Proxy - Cloudflare DNS",
-    "name": "caddy-docker-proxy-cloudflare",
+    "title": "Caddy Docker Proxy",
+    "name": "caddy-docker-proxy",
     "image": "homeall/caddy-reverse-proxy-cloudflare",
     "description": "Caddy with automatic reverse proxy support via labels, includes Cloudflare plugin for wildcard DNS support.",
     "categories": [
@@ -13,13 +13,14 @@
     "restart_policy": "unless-stopped",
     "ports": [
       {
-        "WebUI (http)": "80:80/tcp"
+        "WebUI (http)": "80:80/tcp",
+        "WebUI (https)": "443:443/tcp"
       }
     ],
     "volumes": [
       {
         "container": "/var/run/docker.sock",
-        "bind": "!docker_socket"
+        "bind": "/var/run/docker.sock"
       },
       {
         "container": "/data",
@@ -34,7 +35,7 @@
         "label": "Timezone"
       }
     ],
-    "command": [],
+    "command": ["docker-proxy"],
     "devices": [],
     "labels": [
       {
